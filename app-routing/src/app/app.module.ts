@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -17,20 +16,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth-guard.service';
 
-const appRoutes: Routes = [
-  { path: '', component: HomeComponent },
-  {
-    path: 'users', component: UsersComponent, children: [
-      { path: ':id/:name', component: UserComponent }]
-  },
-  {
-    path: 'servers', component: ServersComponent, children: [
-      { path: ':id', component: ServerComponent },
-      { path: ':id/edit', component: EditServerComponent }
-    ]
-  },
-  {path:'**', component:PageNotFoundComponent}
-]
 
 @NgModule({
   declarations: [
@@ -47,8 +32,7 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule,
-    RouterModule.forRoot(appRoutes)
+    AppRoutingModule
   ],
   providers: [ServersService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
